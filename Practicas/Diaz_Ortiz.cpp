@@ -1,12 +1,10 @@
 //Autor: Diaz Ortiz Brandon Aldair
 #include <stdio.h>
 #include <stdlib.h>
-#define FILAS 1
-#define COLS 6
 
 int main()
 {
-    int **matriz,i,j, filas, columnas,valor,indice,aux,datos;
+    int **matriz,i,j, filas, columnas,valor,indice,datos;
     printf("Cuantos valores quieres ingresar: ");
     scanf("%d",&filas);
     matriz = (int **)calloc(filas,sizeof(int *));
@@ -44,6 +42,8 @@ int main()
         } 
         
     }
+    for ( i = 0; i < filas; i++)
+        free(matriz[i]);
     free(matriz);
     return 0;
 }
