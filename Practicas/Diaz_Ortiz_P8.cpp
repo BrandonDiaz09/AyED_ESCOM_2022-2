@@ -10,7 +10,7 @@ typedef nodo *apu_nodo;
 
 int main(){
 	apu_nodo actual,inicial,auxiliar;
-    actual = NULL, auxiliar=NULL,inicial = NULL,final=NULL;
+    actual = NULL, auxiliar=NULL,inicial = NULL;
 	int num_nodos,i;
 	cout<<"Cuantos nodos quieres crear? ";
 	cin>>num_nodos;
