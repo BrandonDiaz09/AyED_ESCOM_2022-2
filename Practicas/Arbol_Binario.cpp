@@ -239,7 +239,7 @@ void imprimirArbol(){
 		n=pow(2,contador)+n;
 		contador++;
 	}
-	int imprimir[N];
+	int imprimir[N],auxiliar;
 	if (raiz!=NULL)
 	{
 		actual=raiz;
@@ -276,6 +276,7 @@ void imprimirArbol(){
 		contador++;
 	}
 	cout<<"\n";
+	auxiliar=n;
 	int k=0,j,cantidad=1;
 	int espaciado=contador;
 	for ( i = 0; i < contador; i++)
@@ -288,11 +289,14 @@ void imprimirArbol(){
 		{
 			espaciado_fun(n/2);
 			cout<<imprimir[k]<<"\t";
-			espaciado_fun(n/2);
+			espaciado_fun((n/2));
+			espaciado_fun(espaciado);
+			//cout<<"   ";
 			k++;
 		}
 		cout<<"\n";
 		cantidad=2*cantidad;
+		auxiliar=n;
 		n=n-(pow(2,espaciado-1));
 		espaciado--;
 	}
