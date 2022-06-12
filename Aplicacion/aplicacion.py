@@ -19,25 +19,31 @@ class Nodo:
 raiz = Nodo
 
 def descomponer_parametro(parametro):
-    operador1=parametro.find(">")
-    operador2=parametro.find("<")
-    operador3=parametro.find("=")
-    operador4=parametro.find(">=")
-    operador5=parametro.find("<=")
+    operador1=operador2=operador3=operador4=operador5=-1
+    if ">" in parametro and ">=" not in parametro:
+        operador1=parametro.find(">")
+    elif "<" in parametro and "<=" not in parametro:
+        operador2=parametro.find("<")
+    elif ">=" in parametro:
+        operador4=parametro.find(">=")
+    elif "<=" in parametro:
+        operador5=parametro.find("<=")
+    elif "=" in parametro:
+        operador3=parametro.find("=")
     if operador1 >= 0:
-        resultado=[parametro[:operador1],">",parametro[operador1+2:]]
+        resultado=[parametro[:operador1],">",parametro[operador1+1:]]
         return resultado
     elif operador2>= 0:
-        resultado=[parametro[:operador2],"<",parametro[operador2+2:]]
+        resultado=[parametro[:operador2],"<",parametro[operador2+1:]]
         return resultado
     elif operador3>= 0:
-        resultado=[parametro[:operador3],"=",parametro[operador3+2:]]
+        resultado=[parametro[:operador3],"=",parametro[operador3+1:]]
         return resultado
     elif operador4>= 0:
-        resultado=[parametro[:operador4],">=",parametro[operador4+3:]]
+        resultado=[parametro[:operador4],">=",parametro[operador4+2:]]
         return resultado
     elif operador5>= 0:
-        resultado=[parametro[:operador5],"<=",parametro[operador5+3:]]
+        resultado=[parametro[:operador5],"<=",parametro[operador5+2:]]
         return resultado
 
 def insertar_nodos(padre,lineas):
@@ -71,28 +77,28 @@ def imprimir_nodo(nodo):
             imprimir_nodo(nodo_hijo)
 
 def crear_arbol():
-    conocimiento = open('./conocimiento.txt', encoding='utf-8')
-    renglones= conocimiento.readlines()
-    reglas = []
-    #print(reglas)
-    for linea in renglones:
-        regla=linea.replace('\n','')
-        regla=regla.split(',')
-        reglas.append(regla)
-    raiz = Nodo(reglas[0])
-    reglas.pop(0)
-    insertar_nodos(raiz,reglas)
+    with open('./conocimiento.txt', encoding='utf-8') as conocimiento:
+        renglones= conocimiento.readlines()
+        reglas = []
+        #print(reglas)
+        for linea in renglones:
+            regla=linea.replace('\n','')
+            regla=regla.split(',')
+            reglas.append(regla)
+        raiz = Nodo(reglas[0])
+        reglas.pop(0)
+        insertar_nodos(raiz,reglas)
 
-    imprimir_nodo(raiz)
-    conocimiento.close()
+        imprimir_nodo(raiz)
     return raiz
 
 def evaluar_nodo(nodo,variables):
+    nodo.estatus=0
     if nodo.tipo_nodo=="pregunta":
         if nodo.hijos != None:
             for hijo in nodo.hijos:
                 if variables.get(hijo.parametro)==None:
-                    valor_usr = float(input(nodo.valor))
+                    valor_usr = float(input(nodo.valor+" "))
                     nueva_variable = {hijo.parametro: valor_usr}
                     variables.update(nueva_variable)
                     condicion = float(hijo.valor)
@@ -122,12 +128,12 @@ def evaluar_nodo(nodo,variables):
         return variables    
     if nodo.tipo_nodo=="respuesta":
         for hijo in nodo.hijos:
-            if hijo.estatus == 1:
+            if hijo.estatus >= 1:
                 nodo.estatus += 1
                 
     if nodo.tipo_nodo=="raiz":
         for hijo in nodo.hijos:
-            if hijo.estatus == 1:
+            if hijo.estatus >= 1:
                 nodo.estatus += 1
 
         if nodo.estatus > 1:
@@ -145,16 +151,11 @@ def evaluar_nodo(nodo,variables):
                     break
             print(f'{nodo.valor} \n La repuesta es {respuesta}')
         elif nodo.estatus == 0:
-            print(f'{nodo.valor} \n No hay ninguna respuesta correcta')
+            print(f'{nodo.valor} \n No hay ninguna respuesta optima')
 
 def recorrer_arbol(nodo,tipos_nodo,lista_raiz,lista_preguntas,lista_respuestas,lista_casos,lista_operadores):
     if nodo.hijos != None:
         for nodo_hijo in nodo.hijos:
-            if nodo_hijo.tipo_nodo == "raiz":
-                lista_raiz.append(nodo_hijo)
-                nuevo_elemento = {"Raiz": lista_raiz}
-                tipos_nodo.update(nuevo_elemento)
-                recorrer_arbol(nodo_hijo,tipos_nodo,lista_raiz,lista_preguntas,lista_respuestas,lista_casos,lista_operadores)
             if nodo_hijo.tipo_nodo == "pregunta":
                 lista_preguntas.append(nodo_hijo)
                 nuevo_elemento = {"Preguntas": lista_preguntas}
@@ -178,8 +179,8 @@ def recorrer_arbol(nodo,tipos_nodo,lista_raiz,lista_preguntas,lista_respuestas,l
     return tipos_nodo
 
 def diagnostico(tipos_nodo):
-    lista_raiz=tipos_nodo.get("Raiz")
-    lista_casos=tipos_nodo.get("Casos")
+    #ista_raiz=tipos_nodo.get("Raiz")
+    #lista_casos=tipos_nodo.get("Casos")
     lista_preguntas=tipos_nodo.get("Preguntas")
     lista_respuestas=tipos_nodo.get("Respuestas")
     variables={}
@@ -192,21 +193,27 @@ def diagnostico(tipos_nodo):
 
 
 if __name__ == "__main__":
-    tipos_nodo={}
-    lista_raiz=[]
-    lista_preguntas=[]
-    lista_respuestas=[]
-    lista_casos=[]
-    lista_operadores=[]
+    
     while True:
-        menu=int(input("Menu \n1. Cargar conocimiento \n2. Ejecutar diagnostico \n3. Salir\n"))
-        if menu==1:
-            raiz=crear_arbol()
-            print(raiz.id_nodo)
-        elif menu==2:
-            tipos_nodos=recorrer_arbol(raiz,tipos_nodo,lista_raiz,lista_preguntas,lista_respuestas,lista_casos,lista_operadores)
-            diagnostico(tipos_nodos)
-        elif menu==3:
-            quit()
-        else:
-            print("No valido")
+        try:
+            menu=int(input("Menu \n1. Cargar conocimiento \n2. Ejecutar diagnostico \n3. Salir\n"))
+            if menu==1:
+                raiz=crear_arbol()
+            elif menu==2:
+                try:
+                    tipos_nodo={}
+                    lista_raiz=[]
+                    lista_preguntas=[]
+                    lista_respuestas=[]
+                    lista_casos=[]
+                    lista_operadores=[]
+                    tipos_nodos=recorrer_arbol(raiz,tipos_nodo,lista_raiz,lista_preguntas,lista_respuestas,lista_casos,lista_operadores)
+                    diagnostico(tipos_nodos)
+                except AttributeError:
+                    print("No se cargo el conocimiento")
+            elif menu==3:
+                quit()
+            else:
+                print("Se esperan los numeros 1, 2 o 3 como respuesta")        
+        except ValueError:
+            print("Se esperan los numeros 1, 2 o 3 como respuesta")

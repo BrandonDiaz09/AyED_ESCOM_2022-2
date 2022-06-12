@@ -4,15 +4,15 @@
 0,3,respuesta,,,Taxi
 1,4,pregunta,,,¿Cual es el presupuesto con el que cuentas?
 1,5,pregunta,,,¿Cuantas personas van a viajar?
-1,6,pregunta,,,¿En cuanto tiempo te gustaria llegar a tu destino?
+1,6,pregunta,,,¿En cuantos minutos te gustaria llegar a tu destino?
 1,7,pregunta,,,¿Cual es el clima que habra tu ruta?
 2,8,pregunta,,,¿Cual es el presupuesto con el que cuentas?
 2,9,pregunta,,,¿Cuantas personas van a viajar?
-2,10,pregunta,,,¿En cuanto tiempo te gustaria llegar a tu destino?
+2,10,pregunta,,,¿En cuantos minutos te gustaria llegar a tu destino?
 2,11,pregunta,,,¿Cual es el clima que habra tu ruta?
 3,12,pregunta,,,¿Cual es el presupuesto con el que cuentas?
 3,13,pregunta,,,¿Cuantas personas van a viajar?
-3,14,pregunta,,,¿En cuanto tiempo te gustaria llegar a tu destino?
+3,14,pregunta,,,¿En cuantos minutos te gustaria llegar a tu destino?
 3,15,pregunta,,,¿Cual es el clima que habra tu ruta?
 4,16,caso,costo>=5,,,
 5,17,caso,personas<=100,,,
