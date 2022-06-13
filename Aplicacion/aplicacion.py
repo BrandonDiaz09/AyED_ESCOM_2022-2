@@ -19,7 +19,6 @@ class Nodo:
 raiz = Nodo
 
 def descomponer_caso(caso):
-    operador1=operador2=operador3=operador4=operador5=-1
     if ">" in caso and ">=" not in caso:
         operador1=caso.find(">")
         resultado=[caso[:operador1],">",caso[operador1+1:]]
@@ -145,9 +144,9 @@ def evaluar_nodo(nodo,variables):
                 if hijo.estatus==1:
                     respuesta = hijo.valor
                     break
-            print(f'{nodo.valor} \n La repuesta es {respuesta}')
+            print(f'{nodo.valor}\nLa repuesta es {respuesta}')
         elif nodo.estatus == 0:
-            print(f'{nodo.valor} \n No hay ninguna respuesta optima')
+            print(f'{nodo.valor}\nNo hay ninguna respuesta optima')
 
 def recorrer_arbol(nodo,tipos_nodo,lista_raiz,lista_preguntas,lista_respuestas,lista_casos,lista_operadores):
     if nodo.hijos != None:
