@@ -1,28 +1,28 @@
-0,0,raiz,,,¿Cual el medio de transporte más optimo para viajar?
-0,1,respuesta,,,Metro
-0,2,respuesta,,,Camion
-0,3,respuesta,,,Taxi
-1,4,pregunta,,,¿Cual es el presupuesto con el que cuentas?
-1,5,pregunta,,,¿Cuantas personas van a viajar?
-1,6,pregunta,,,¿En cuantos minutos te gustaria llegar a tu destino?
-1,7,pregunta,,,¿Cual es el clima que habra tu ruta?
-2,8,pregunta,,,¿Cual es el presupuesto con el que cuentas?
-2,9,pregunta,,,¿Cuantas personas van a viajar?
-2,10,pregunta,,,¿En cuantos minutos te gustaria llegar a tu destino?
-2,11,pregunta,,,¿Cual es el clima que habra tu ruta?
-3,12,pregunta,,,¿Cual es el presupuesto con el que cuentas?
-3,13,pregunta,,,¿Cuantas personas van a viajar?
-3,14,pregunta,,,¿En cuantos minutos te gustaria llegar a tu destino?
-3,15,pregunta,,,¿Cual es el clima que habra tu ruta?
-4,16,caso,costo>=5,,,
-5,17,caso,personas<=100,,,
-6,18,caso,tiempo>=30,,,
-7,19,caso,clima>=9,,,
-8,20,caso,costo>=12,,,
-9,21,caso,personas<=45,,,
-10,22,caso,tiempo>=20,,,
-11,23,caso,clima>=15,,,
-12,24,caso,costo>=52,,,
-13,25,caso,personas<=4,,,
-14,26,caso,tiempo>=10,,,
-15,27,caso,clima>=15,,,
+0,0,raiz,¿Cual el medio de transporte más optimo para viajar?
+0,1,respuesta,Metro
+0,2,respuesta,Camion
+0,3,respuesta,Taxi
+1,4,pregunta,¿Cual es el presupuesto con el que cuentas?
+1,5,pregunta,¿Cuantas personas van a viajar?
+1,6,pregunta,¿En cuantos minutos te gustaria llegar a tu destino?
+1,7,pregunta,¿Cual es el clima que habra tu ruta?
+2,8,pregunta,¿Cual es el presupuesto con el que cuentas?
+2,9,pregunta,¿Cuantas personas van a viajar?
+2,10,pregunta,¿En cuantos minutos te gustaria llegar a tu destino?
+2,11,pregunta,¿Cual es el clima que habra tu ruta?
+3,12,pregunta,¿Cual es el presupuesto con el que cuentas?
+3,13,pregunta,¿Cuantas personas van a viajar?
+3,14,pregunta,¿En cuantos minutos te gustaria llegar a tu destino?
+3,15,pregunta,¿Cual es el clima que habra tu ruta?
+4,16,caso,costo>=5
+5,17,caso,personas<=100
+6,18,caso,tiempo>=30
+7,19,caso,clima>=9
+8,20,caso,costo>=12
+9,21,caso,personas<=45
+10,22,caso,tiempo>=20
+11,23,caso,clima>=15
+12,24,caso,costo>=52
+13,25,caso,personas<=4
+14,26,caso,tiempo>=10
+15,27,caso,clima>=15

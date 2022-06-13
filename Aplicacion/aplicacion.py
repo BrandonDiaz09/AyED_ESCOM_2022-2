@@ -10,35 +10,35 @@ class Nodo:
         self.id_padre = int(datos[0])
         self.id_nodo = int(datos[1])
         self.tipo_nodo= datos[2]
-        self.parametro = datos[3]
-        self.operador= datos[4]
-        self.valor = datos[5]
+        self.valor = datos[3]
+        self.parametro = ''
+        self.operador= ''
         self.estatus = 0
         self.hijos = None
 
 raiz = Nodo
 
-def descomponer_parametro(parametro):
+def descomponer_caso(caso):
     operador1=operador2=operador3=operador4=operador5=-1
-    if ">" in parametro and ">=" not in parametro:
-        operador1=parametro.find(">")
-        resultado=[parametro[:operador1],">",parametro[operador1+1:]]
+    if ">" in caso and ">=" not in caso:
+        operador1=caso.find(">")
+        resultado=[caso[:operador1],">",caso[operador1+1:]]
         return resultado
-    elif "<" in parametro and "<=" not in parametro:
-        operador2=parametro.find("<")
-        resultado=[parametro[:operador2],"<",parametro[operador2+1:]]
+    elif "<" in caso and "<=" not in caso:
+        operador2=caso.find("<")
+        resultado=[caso[:operador2],"<",caso[operador2+1:]]
         return resultado
-    elif ">=" in parametro:
-        operador4=parametro.find(">=")
-        resultado=[parametro[:operador4],">=",parametro[operador4+2:]]
+    elif ">=" in caso:
+        operador4=caso.find(">=")
+        resultado=[caso[:operador4],">=",caso[operador4+2:]]
         return resultado
-    elif "<=" in parametro:
-        operador5=parametro.find("<=")
-        resultado=[parametro[:operador5],"<=",parametro[operador5+2:]]
+    elif "<=" in caso:
+        operador5=caso.find("<=")
+        resultado=[caso[:operador5],"<=",caso[operador5+2:]]
         return resultado
-    elif "=" in parametro:
-        operador3=parametro.find("=")
-        resultado=[parametro[:operador3],"=",parametro[operador3+1:]]
+    elif "=" in caso:
+        operador3=caso.find("=")
+        resultado=[caso[:operador3],"=",caso[operador3+1:]]
         return resultado
 
 def insertar_nodos(padre,lineas):
@@ -48,7 +48,7 @@ def insertar_nodos(padre,lineas):
     for hijo in lista_filtrada:
         nodo_hijo= Nodo(hijo)
         if (nodo_hijo.tipo_nodo=="caso"):
-            valores= descomponer_parametro(nodo_hijo.parametro)
+            valores= descomponer_caso(nodo_hijo.valor)
             nodo_hijo.parametro= valores[0]
             nodo_hijo.operador=valores[1]
             nodo_hijo.valor=valores[2]
@@ -84,7 +84,8 @@ def crear_arbol():
         reglas.pop(0)
         insertar_nodos(raiz,reglas)
 
-        imprimir_nodo(raiz)
+        #imprimir_nodo(raiz)
+        print("\nSe cargo el conocimiento correctamente en el arbol\n")
     return raiz
 
 def evaluar_nodo(nodo,variables):
