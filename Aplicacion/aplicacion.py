@@ -22,28 +22,23 @@ def descomponer_parametro(parametro):
     operador1=operador2=operador3=operador4=operador5=-1
     if ">" in parametro and ">=" not in parametro:
         operador1=parametro.find(">")
-    elif "<" in parametro and "<=" not in parametro:
-        operador2=parametro.find("<")
-    elif ">=" in parametro:
-        operador4=parametro.find(">=")
-    elif "<=" in parametro:
-        operador5=parametro.find("<=")
-    elif "=" in parametro:
-        operador3=parametro.find("=")
-    if operador1 >= 0:
         resultado=[parametro[:operador1],">",parametro[operador1+1:]]
         return resultado
-    elif operador2>= 0:
+    elif "<" in parametro and "<=" not in parametro:
+        operador2=parametro.find("<")
         resultado=[parametro[:operador2],"<",parametro[operador2+1:]]
         return resultado
-    elif operador3>= 0:
-        resultado=[parametro[:operador3],"=",parametro[operador3+1:]]
-        return resultado
-    elif operador4>= 0:
+    elif ">=" in parametro:
+        operador4=parametro.find(">=")
         resultado=[parametro[:operador4],">=",parametro[operador4+2:]]
         return resultado
-    elif operador5>= 0:
+    elif "<=" in parametro:
+        operador5=parametro.find("<=")
         resultado=[parametro[:operador5],"<=",parametro[operador5+2:]]
+        return resultado
+    elif "=" in parametro:
+        operador3=parametro.find("=")
+        resultado=[parametro[:operador3],"=",parametro[operador3+1:]]
         return resultado
 
 def insertar_nodos(padre,lineas):
